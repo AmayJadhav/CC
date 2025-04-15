@@ -1,0 +1,131 @@
+CLOUD COMPUTING REDUCED CODES
+
+PRAC 1 
+Currency_converter.py
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+RATE = 0.012
+
+@app.route('/convert')
+def convert():
+    try:
+        inr = float(request.args.get('inr', ''))
+        return jsonify(INR=inr, USD=round(inr * RATE, 4))
+    except (TypeError, ValueError):
+        return jsonify(error="Invalid or missing INR amount"), 400
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+CurrencyConverterClient.java
+import java.net.http.*;
+import java.net.URI;
+import java.util.Scanner;
+
+public class CurrencyConverterClient {
+    public static void main(String[] args) {
+        System.out.print("Enter INR: ");
+        String inr = new Scanner(System.in).nextLine();
+
+        try {
+            String url = "http://localhost:5000/convert?inr=" + inr;
+            var request = HttpRequest.newBuilder().uri(URI.create(url)).build();
+            var response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            
+            System.out.println("Response: " + response.body());
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+    }
+}
+
+PRAC 2
+CalculatorClient.java
+package com.example.soap;
+
+import javax.xml.namespace.QName;
+import javax.xml.ws.Service;
+import java.net.*;
+
+public class CalculatorClient {
+    public static void main(String[] args) throws Exception {
+        CalculatorService calc = Service.create(
+            new URL("http://localhost:8080/calculator?wsdl"),
+            new QName("http://soap.example.com/", "CalculatorServiceImplService")
+        ).getPort(CalculatorService.class);
+
+        System.out.println("Result: " + calc.add(10, 20));
+    }
+}
+
+CalculatorPublisher.java 
+package com.example.soap;
+
+import javax.xml.ws.Endpoint;
+
+public class CalculatorPublisher {
+    public static void main(String[] args) {
+        Endpoint.publish("http://localhost:8080/calculator", new CalculatorServiceImpl());
+    }
+}
+CalculatorService.java 
+package com.example.soap;
+
+import javax.jws.WebService;
+
+@WebService
+public interface CalculatorService {
+    int add(int a, int b);
+}
+
+CalculatorServiceImpl.java 
+package com.example.soap;
+
+import javax.jws.WebService;
+
+@WebService(endpointInterface = "com.example.soap.CalculatorService")
+public class CalculatorServiceImpl implements CalculatorService {
+    public int add(int a, int b) {
+        return a + b;
+    }
+}
+PRAC 4
+import requests
+
+res = requests.get(
+    'https://www.googleapis.com/customsearch/v1',
+    params={
+        'q': 'nykaa',
+        'key': ‘your api key’,
+        'cx': 'your search engine id'
+    }
+).json()
+
+if 'items' in res:
+    print(res['items'][0]['link'])
+else:
+    print("No results found.")
+
+
+PRAC 6
+from flask import Flask, request, send_from_directory
+import os
+
+app = Flask(__name__)
+os.makedirs('uploads', exist_ok=True)
+
+@app.post('/upload')
+def upload():
+    f = request.files.get('file')
+    if not f: return {"error": "No file"}, 400
+    f.save(f'uploads/{f.filename}')
+    return {"message": f"'{f.filename}' uploaded"}
+
+@app.get('/download/<name>')
+def download(name):
+    try: return send_from_directory('uploads', name, as_attachment=True)
+    except: return {"error": "Not found"}, 404
+
+app.run(debug=True)
+
