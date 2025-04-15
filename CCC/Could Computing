@@ -40,6 +40,9 @@ public class CurrencyConverterClient {
     }
 }
 
+
+
+
 PRAC 2
 CalculatorClient.java
 package com.example.soap;
@@ -90,6 +93,10 @@ public class CalculatorServiceImpl implements CalculatorService {
         return a + b;
     }
 }
+
+
+
+
 PRAC 4
 import requests
 
@@ -106,6 +113,11 @@ if 'items' in res:
     print(res['items'][0]['link'])
 else:
     print("No results found.")
+
+
+
+
+
 
 
 PRAC 6
