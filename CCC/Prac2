@@ -1,0 +1,84 @@
+PRACTICAL NO 2
+AIM : Create a simple SOAP Service
+
+SOLUTION:
+Step 1 : Download Intellij IDEA and JDK 8 
+
+Step 2 : Create a new project in Intellij Idea and select the build system as Maven
+
+
+Step 3 : Right click on the soap folder >New> Java Class and give a name to your file . Create the below given Files
+
+
+Step 4 : Write the code in the given files
+
+CalculatorClient.java
+package com.example.soap;
+
+import javax.xml.namespace.QName;
+import javax.xml.ws.Service;
+import java.net.URL;
+
+public class CalculatorClient {
+
+    public static void main(String[] args) throws Exception {
+        // URL to the WSDL
+        URL url = new URL("http://localhost:8080/calculator?wsdl");
+
+        // Correct QName based on the WSDL (Check the actual service name)
+        QName qname = new QName("http://soap.example.com/", "CalculatorServiceImplService");
+
+        // Creating service instance
+        Service service = Service.create(url, qname);
+
+        // Getting the port and invoking the method
+        CalculatorService calculator = service.getPort(CalculatorService.class);
+
+        int result = calculator.add(10, 20);
+        System.out.println("Result: " + result);
+    }
+}
+
+
+CalculatorPublisher.java
+package com.example.soap;
+
+import javax.xml.ws.Endpoint;
+
+public class CalculatorPublisher {
+    public static void main(String[] args) {
+        // Publishing the service at a specific URL
+        Endpoint.publish("http://localhost:8080/calculator", new CalculatorServiceImpl());
+        System.out.println("Service is running at http://localhost:8080/calculator");
+    }
+}
+
+CalculatorService.java
+package com.example.soap;
+
+import javax.jws.WebService;
+
+@WebService
+public interface CalculatorService {
+    public int add(int num1, int num2);
+}
+
+
+CalculatorServiceImpl.java
+package com.example.soap;
+
+import javax.jws.WebService;
+
+@WebService(endpointInterface = "com.example.soap.CalculatorService")
+public class CalculatorServiceImpl implements CalculatorService {
+
+    @Override
+    public int add(int num1, int num2) {
+        return num1 + num2;
+    }
+}
+
+Step 5 : First run the CalculatorePublisher.java file by clicking on the run button
+
+
+Step 6 : Then Run the CalculatorClient.java file
