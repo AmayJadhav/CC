@@ -1,0 +1,45 @@
+PRACTICAL NO 8
+AIM : Implementation of Openstack with user and private network creation 
+ 
+SOLUTION: 
+ 
+Step 1 : Update and Upgarde your ubuntu system
+
+Step 2:  Install Microstack beta
+Command : sudo snap install microstack --beta 
+ 
+ 
+Step 3: Check the installed status and version of the MicroStack snap package.
+Command : snap list microstack 
+ 
+ 
+Step 4: initialize MicroStack
+Command : sudo microstack init --auto --control 
+ 
+ 
+Step 5: Check the installed version of OpenStack
+Command : microstack.openstack --version 
+ 
+ 
+Step 6: Retrieve the Keystone password for the OpenStack deployment managed by MicroStack.
+Command : sudo snap get microstack config.credentials.keystone-password 
+ 
+ 
+ 
+Step 7: Note down the IP address of your linux system
+Command :  ip a 
+ 
+ 
+ 
+Step 8: Now paste inet : 10.0.2.15 in browser it will open the following login page of Openstack 
+ 
+ 
+ 
+ 
+Step 9: Fill the username as ‘admin’ and password which is provided in step 6
+ 
+ 
+ 
+ 
+Step 10: Congratulation you logged in OpenStack 
+ 
