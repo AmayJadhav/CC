@@ -1,0 +1,58 @@
+PRACTICAL NO 6
+AIM : Develop application to download image/video from server or upload image/video to server using MTOM techniques
+
+SOLUTION:
+Step 1 :  Inside the project folder create a new file named app.py and write the following code
+from flask import Flask, request, send_from_directory
+import os
+
+app = Flask(__name__)
+
+UPLOAD_FOLDER = 'uploads'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    file = request.files.get('file')
+    if file:
+        file_path = os.path.join(UPLOAD_FOLDER, file.filename)
+        file.save(file_path)
+        return {"message": f"File '{file.filename}' uploaded successfully!"}, 200
+    return {"error": "No file uploaded"}, 400
+
+@app.route('/download/<filename>', methods=['GET'])
+def download_file(filename):
+    try:
+        return send_from_directory(UPLOAD_FOLDER, filename, as_attachment=True)
+    except FileNotFoundError:
+        return {"error": "File not found"}, 404
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+Step 2 :  Run the app.py code
+
+
+Step 3 : Open Postman API and and select POST request
+
+
+Step 4 : Enter the following url : http://127.0.0.1:5000/upload
+Step 5 :  Click on Body and select form-data
+
+
+Step 6 : Select file and name it as ‘file’
+
+
+
+Step 7 : In the value section Click on Select files and then click on New file from local machine
+
+
+Step 8 : Click on the Cloud button to upload the image
+
+
+Step 9 : Click on Send and You will get to see the following output
+
+
+Step 10 : Now Go to Vscode and inside the upload folder you will see the image you uploaded in Postman
+
+
