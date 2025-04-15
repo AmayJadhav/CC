@@ -1,0 +1,157 @@
+PRACTICAL NO.7
+AIM: Implement FOSS-Cloud Functionality VSI (Virtual Server Infrastructure) Infrastructure as a Service (IaaS), Storage , VSI Platform as a Service (PaaS)
+
+SOLUTION:
+1) Implement FOSS-Cloud Functionality VSI (Virtual Server Infrastructure) Infrastructure as a Service (IaaS), Storage
+Step 1: Download and install FOSS-Cloud from its official website.
+
+
+Step 2: Open Virtual Machine and create new Virtual Machine. Add your foss cloud iso file path at ISO Image.
+
+
+Step 3: At the time of setup allocate Base memory.
+
+
+Step 4: Create Virtual Hard Disk and give disk size.
+
+
+
+
+
+Step 5: Click on settings.
+
+
+Step 6: Select System  Display & add video memory. 
+
+
+
+
+
+
+Step 7: Select Network & add Bridge Adapter. Then USB & SELECT USB 2.0 (OHCI + EHCI )Controller.
+
+
+Step 8: Block/Off the firewall from settings.
+
+
+
+Step 9: Select 1st option here and Enter.
+
+
+
+Step 10:  Type yes to start the installation.
+
+
+Step 11: Open cmd and type following command and enter.
+
+
+Step 12: Now start with the FOSS virtual machine.
+
+
+Step 13:  Enter Number 1 to install Demo-System server.
+
+Step 14:  Add device name sda.
+
+
+Step 15: Enter yes to continue for installation of Device Partitioning.
+
+
+Step 16: Add available Ethernet device name eg:enp0s3
+
+
+
+
+
+Step 17: Enter yes to use automatic network configuration and enter yes.
+
+
+
+Step 18: Now select Boot from first hard disk and enter.
+
+
+Step 19:  Select FOSS-Cloud and press Enter.
+
+
+
+
+Step 20: Now, login with user credentials given here.
+
+
+Step 21: Add following command in front of localhost fc-node-configuration –n demo-system –password admin. Press Enter and the installation process will started.
+
+
+
+
+Step 22: Type ifconfig command to get inet of the device.
+
+
+
+
+
+
+
+
+Step 23:  Open browser add ip address & press enter
+
+
+Step 24: Login with the credentials.
+
+
+
+Step 25:  You are done with the FOSS Cloud installation & setup.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2)  Implement FOSS-Cloud Functionality - VSI Platform as a Service (PaaS),
+Step 1: After installation, it will show you an IP Address. Put it in your browser to access your administration page. 
+
+
+Step 2: Now select virtual machine  Upload ISO File & choose iso file to upload. You can upload either Ubuntu iso file or foss iso file or any other.
+
+
+Step 3: Add file name after choosing the iso file.
+
+
+Step 4: Now click on upload button.
+
+
+
+
+
+Step 5: Now after uploading file. Select create under the profile section.
+
+
+Step 6: Select in 
+Step 1 : select windows  en-US. 
+Step 2: Select iso file. Give Name to your Vm Profile. Add Description. Add memory and remaining details as given or provided & click on Create button given below.
+
+Step 7: After creating following page will open.
+
+
+
+
+
+
+
+Step 8: Now, create VmTemplate.
+
+
+Step 9: After creating template Manage VMTemplate page will be displayed. Status is stopped to start it click on green Arrow in Run Action to start the status.
+
+Step 10: Here, you can see the status is running.!
+
+
