@@ -1,0 +1,84 @@
+
+PRACTICAL NO 4
+AIM : Develop application to consume Google’s search / Google’s Map RESTful Web service. 
+
+SOLUTION :
+Step 1 :  Search “console cloud google” on chrome  and sign up: https://console.cloud.google.com
+
+Step 2 : Click on my first project and create new project
+
+
+Step 3 : Give project name and then click create 
+
+
+Step 4 : You can see your project by clicking on bell icon
+
+Step 5 : Click on bell icon and click “select project” Once you select the project then click on  “APIs and Services” → Enabled APIs and services
+	
+
+Step 6 : Search “Custom search api” on search bar and click on first link
+
+
+Step 7 : In google cloud project you always  have to specify which functionality you want  to enable.
+Click on enable to enable custom search api. This enable the custom search api for this particular project
+
+
+Step 8 : Now you  need to generate an api key to authenticate yourself from python.
+In the Api & Services section click on credentials→ click create credentials → Click API key 
+
+
+Step 9 : API key will be created , copy it 
+
+Step 10 : Now create a file named API_KEY inside your project folder and paste your API key value in it
+
+
+Step 11 : We have to Create a search engine. Navigate to the following website : 
+https://programmablesearchengine.google.com/about/ 
+
+Step 12 :  Click on Get started and then click on ‘create your first search engine’
+
+
+Step 13 : Give name to your search engine and select the "search the entire web “  and click create
+
+Step 14 : A new search engine will be created
+
+
+Step 15 : Click “go back to all search engine” → click on your search engine → Copy the search engine ID
+
+
+Step 16 : Create a new file inside your project folder as SEARCH_ENGINE_ID and paste your search engine ID
+
+
+Step 17 : Open new terminal and Download requests using the command, pip3 install requests 
+
+
+Step 18 : Create a file main.py and write a below code in it
+CODE:
+import requests
+
+# Replace with your actual API key and Search Engine ID
+API_KEY = 'ADD_YOUR_API'
+SEARCH_ENGINE_ID = 'ADD_YOUR_SEARCH_ENGINE_ID'
+
+search_query = 'the derma co'
+url = 'https://www.googleapis.com/customsearch/v1'
+params = {
+    'q': search_query,
+    'key': API_KEY,
+    'cx': SEARCH_ENGINE_ID
+}
+
+response = requests.get(url, params=params)
+results = response.json()
+
+if 'items' in results:
+    print(results['items'][0]['link'])
+else:
+    print("No results found.")
+
+OUTPUT:
+
+
+Click on the link to get the result of your search query
+
+
