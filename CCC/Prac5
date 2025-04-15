@@ -1,0 +1,79 @@
+PRACTICAL NO. 5
+AIM : Installation and Configuration of virtualization using KVM.
+
+
+SOLUTION :
+
+Step 1: Update your Ubuntu
+Command : Sudo apt-get update
+
+Step 2: Check if hardware virtualization support is available on a CPU in an Ubuntu system. Type the following command.
+Command : egrep -c ‘(vmx|svm)’ /proc/cpuinfo
+
+
+Step 3 : Install cpu-checker
+Command : Sudo apt install -y cpu-checker
+
+
+
+Step 4: check if your system supports hardware virtualization and if it is enabled.
+ Commad : kvm-ok
+
+Step 5: Install the necessary tools and dependencies for setting up KVM
+Command : sudo apt-get install -y qemu-kvm virt-manager libvirt-daemon-system virtinst libvirt-clients bridge-utils
+
+
+
+
+Step 6: Enables and starts the libvirtd service at boot for managing KVM virtualization. Checks the current status of the libvirtd service to confirm it is active.
+Command : sudo systemctl enable –now libvirtd
+sudo systemctl start libvirtd 
+sudo systemctl status linvirtd
+
+
+Step 7: In this step search virtual machine and start
+
+
+
+Step 8: Click add connection
+
+
+
+Step 9: Now click connect
+
+Step 10 : The select the computer icon as shown in mage
+
+
+
+Step 11 : Select ‘Local install media’ and Click on Forward
+
+
+
+Step 12:  Select the .iso from Downloads and click on ‘Choose volume’ 
+
+Step 13 : Click on ‘Forward’
+
+
+
+Step 14 : Select Memory= 2048 and CPUs = 2 and Click on ‘Forward’
+
+
+
+
+
+
+Step 15: Click on Radio button and config. The disk image to 15.0 and click on Forward
+
+
+
+Step 16 : Click on ‘Finish’
+
+
+Step 17 : The installation has been successfully completed
+Select the Language i.e English
+
+
+Select second option from arrow key ‘Install Ubuntu’
+
+All set and ready to go!
+
