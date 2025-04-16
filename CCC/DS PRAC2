@@ -1,0 +1,67 @@
+PRACTICAL NO 2
+AIM : Data Frames and Basic Data Pre-processing 
+• Read data from CSV and JSON files into a data frame. 
+• Perform basic data pre-processing tasks such as handling missing values and outliers. 
+• Manipulate and transform data using functions like filtering, sorting, and grouping.
+
+INPUT:
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load Data
+df_csv = pd.read_csv('data.csv')
+df_json = pd.read_json('data.json')
+
+# Explore Data
+
+print("CSV Info:", df_csv.info(),"\n")
+print("JSON Info:", df_json.info(),"\n")
+print("CSV Description:\n", df_csv.describe(),"\n")
+print("JSON Description:\n", df_json.describe(),"\n")
+
+# Handle Missing Values
+numeric_cols = df_csv.select_dtypes(include=np.number).columns
+df_csv.fillna(df_csv.select_dtypes(include=np.number).mean(), inplace=True)
+df_csv.ffill(inplace=True)
+df_json.ffill(inplace=True)
+
+# Handle Outliers
+for col in numeric_cols:
+    q1, q3 = df_csv[col].quantile([0.25, 0.75])
+    iqr = q3 - q1
+    df_csv = df_csv[(df_csv[col] >= q1 - 1.5 * iqr) & (df_csv[col] <= q3 + 1.5 * iqr)]
+
+# Manipulate Data
+if 'salary' in df_csv.columns and 'department' in df_csv.columns:
+    filtered_csv = df_csv[df_csv['salary'] > 10]
+    print("FILTERING:\n",filtered_csv,"\n")
+    
+    sorted_csv = df_csv.sort_values(by='salary')
+    print("SORTING:\n",sorted_csv,"\n")
+    
+    grouped_csv = df_csv.groupby('department')[numeric_cols].mean()
+    print("GROUPING:\n",grouped_csv)
+
+# Save Cleaned Data
+df_csv.to_csv('cleaned_data.csv', index=False)
+df_json.to_json('cleaned_data.json', orient='records')
+
+# Visualize Data
+if 'salary' in df_csv.columns:
+    df_csv['salary'].hist(bins=20)
+    plt.title('Histogram')
+    plt.show()
+
+sns.heatmap(df_csv[numeric_cols].corr(), annot=True, cmap='coolwarm')
+plt.title('Correlation Heatmap')
+plt.show()
+
+OUTPUT:
+
+
+
+
+
+
