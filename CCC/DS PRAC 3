@@ -1,0 +1,106 @@
+PRACTICAL NO 3
+AIM : Feature Scaling and Dummification 
+•Apply feature-scaling techniques like standardization and normalization to numerical features. 
+•Perform feature dummification to convert categorical variables into numerical representations
+
+SOLUTION :
+1) Apply feature-scaling techniques like standardization and normalization to numerical features. 
+
+INPUT:
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+from sklearn.linear_model import LogisticRegression
+
+# Load the Iris dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Display the initial data
+print("Initial data:")
+print(X_test[:5])
+
+# Create a pipeline
+pipeline = Pipeline([
+    ('imputer', SimpleImputer(strategy='mean')),
+    ('scaler', StandardScaler()),
+    ('pca', PCA(n_components=2)),
+    ('model', LogisticRegression())
+])
+
+# Fit and predict using the pipeline
+pipeline.fit(X_train, y_train)
+y_pred = pipeline.predict(X_test)
+
+# Transform and print results of preprocessing steps
+X_imputed = pipeline.named_steps['imputer'].transform(X_test)
+X_scaled = pipeline.named_steps['scaler'].transform(X_imputed)
+X_pca = pipeline.named_steps['pca'].transform(X_scaled)
+
+print("Imputed data:")
+print(X_imputed[:5])
+print("Scaled data:")
+print(X_scaled[:5])
+print("PCA-transformed data:")
+print(X_pca[:5])
+
+# Visualize the first two principal components
+plt.scatter(X_pca[:, 0], X_pca[:, 1], c=y_pred, cmap='viridis')
+plt.xlabel('Principal Component 1')
+plt.ylabel('Principal Component 2')
+plt.title('PCA Visualization with Logistic Regression')
+plt.show()  
+
+OUTPUT:
+
+
+2)Perform feature dummification to convert categorical variables into numerical representations
+
+INPUT:
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OneHotEncoder
+import pandas as pd
+
+# Load the Iris dataset
+iris = load_iris()
+X = pd.DataFrame(iris.data, columns=iris.feature_names)
+y = pd.DataFrame(iris.target, columns=["Target"])
+
+# Add a categorical column for demonstration
+X['Category'] = ['A', 'B', 'C', 'A', 'B', 'C'] * 25  # Dummy categorical column
+
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Perform feature dummification on the categorical column
+encoder = OneHotEncoder(sparse_output=False, drop='first')  # Avoid multicollinearity
+X_train_dummies = encoder.fit_transform(X_train[['Category']])
+X_test_dummies = encoder.transform(X_test[['Category']])
+
+# Convert the dummified features to DataFrame for clarity
+dummy_columns = encoder.get_feature_names_out(['Category'])
+X_train_dummies_df = pd.DataFrame(X_train_dummies, columns=dummy_columns, index=X_train.index)
+X_test_dummies_df = pd.DataFrame(X_test_dummies, columns=dummy_columns, index=X_test.index)
+
+# Drop the original categorical column and combine with dummies
+X_train_final = pd.concat([X_train.drop(columns=['Category']), X_train_dummies_df], axis=1)
+X_test_final = pd.concat([X_test.drop(columns=['Category']), X_test_dummies_df], axis=1)
+
+# Display results
+print("Original Training Data with Categorical Column:")
+print(X_train.head())
+print("\nDummified Training Data:")
+print(X_train_final.head())
+
+OUTPUT:
