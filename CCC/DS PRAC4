@@ -1,0 +1,31 @@
+PRACTICAL NO 4
+AIM : Hypothesis Testing 
+Formulate null and alternative hypotheses for a given problem. 
+Conduct a hypothesis test using appropriate statistical tests (e.g., t-test, chisquare test). 
+Interpret the results and draw conclusions based on the test outcomes
+
+INPUT:
+import scipy.stats as stats
+import numpy as np
+
+# Step 1: Formulate Hypotheses
+# Null Hypothesis (H0): The sample mean is equal to the population mean
+# Alternative Hypothesis (H1): The sample mean is different from the population mean
+
+population_mean = 50  # Assume known population mean
+sample_data = [45, 55, 52, 48, 49, 51, 53, 47, 54, 50]  # Sample dataset
+
+# Step 2: Conduct Hypothesis Test (One-Sample t-test)
+t_stat, p_value = stats.ttest_1samp(sample_data, population_mean)
+
+# Step 3: Interpret the results
+alpha = 0.05  # Significance level
+print(f"Test Statistic: {t_stat:.4f}")
+print(f"P-value: {p_value:.4f}")
+
+if p_value < alpha:
+    print("Reject the null hypothesis: The sample mean is significantly different from the population mean.")
+else:
+    print("Fail to reject the null hypothesis: No significant difference between sample mean and population mean.")
+
+OUTPUT:
