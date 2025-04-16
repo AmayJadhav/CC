@@ -1,0 +1,93 @@
+PRACTICAL NO 1 
+AIM : Introduction to Excel 
+• Perform conditional formatting on a dataset using various criteria. 
+• Create a pivot table to analyze and summarize data. 
+• Use VLOOKUP function to retrieve information from a different worksheet or table. 
+• Perform what-if analysis using Goal Seek to determine input values for desired output
+
+SOLUTION:
+1. Perform Conditional Formatting on a Dataset
+Step 1: Open Excel and load your dataset.
+
+
+Step 2: Select the cells where you want to apply formatting.
+
+Step 3: Go to the Home tab → Click Conditional Formatting. Choose a rule e.g., Highlight Cells Rules then click on Greater Than.
+
+
+Step 4: Set a format (e.g., Green Fill) → Click OK
+
+
+Step 5: Now you can see that those whose score is greater than 80 is highlighted.
+
+
+Step 6 : Change data in the dataset to see the conditional formatting dynamically update.
+
+
+2. Create a Pivot Table
+Step 1: Open Excel and load your dataset.
+
+
+Step 2: Go to the Insert tab → Click PivotTable.
+
+
+Step 3: Choose to create it in a new worksheet → Click OK.
+
+
+Step 4: A new sheet will be created for the pivot table
+
+
+Step 4: Drag fields into Rows, Columns, and Values areas.
+
+
+Step 5: Analyze the dataset to summarize scores by Subject or Grade.
+
+
+3. Use VLOOKUP
+Step 1: Prepare two sheets  one with IDs and Names, another with Grades.
+Sheet1_IDs_and_Names :
+
+
+Sheet2_IDs_and_Grades :
+
+
+Step 2: Go to Sheet1_IDs_and_Names. Add a new column next to the Name column. Label it as Grade.
+
+Step 3:  In Sheet1_IDs_and_Names, click on cell C2 (the first cell in the Grade column).
+Type the formula and press enter:
+=VLOOKUP(A2, Sheet2_IDs_and_Grades!A:B, 2, FALSE)
+
+Here,
+A2: The lookup value (Student ID in Sheet1).
+Sheet2_IDs_and_Grades!A:B: The range in Sheet2 where the function will search (Student ID and Grade).
+2: The column index number of the value to return (Grade is in the 2nd column of the range).
+FALSE: Ensures an exact match.
+
+Step 4: Drag the fill handle (the small square at the bottom-right corner of the selected cell) down the column to copy the formula for all rows.
+
+Step 5: Verify the Results , Check if the grades match correctly with the data in Sheet2_IDs_and_Grades.
+
+4. Perform What-If Analysis Using Goal Seek
+Step 1: Open a new Excel workbook. In Sheet1, create the following headers in row 1:
+A1: Product ID
+B1: Product Name
+C1: Price
+D1: Quantity
+E1: Total Price
+Fill in the following data in the respective columns.  Set up a formula for Total Price column as total Price = Price x Quantity.
+
+
+Step 2: In Sheet1, click on cell E2 (Total Price for Product 1 i.e Fash Wash). Navigate to the Data tab on the ribbon. In the Forecast group, click on ‘What-If Analysis’ and select ‘Goal Seek’ from the dropdown
+ 
+
+Step 3: In the Goal Seek dialog box set the values as :
+Set Cell: E2 (This is the cell with the formula for Total Price).
+To Value: Enter the target Total Price (e.g., 500).
+By Changing Cell: D2 (This is the Quantity that you want to adjust to achieve the target Total Price).
+
+
+Step 4: Click OK to allow Goal Seek to adjust the Quantity to achieve the target Total Price. you can see the Goal Seek Status
+
+
+Step 5: Review the updated result.
+
