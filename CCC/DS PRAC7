@@ -1,0 +1,61 @@
+PRACTICAL NO 7 
+AIM : Logistic Regression and Decision Tree 
+Build a logistic regression model to predict a binary outcome. 
+Evaluate the model's performance using classification metrics (e.g., accuracy, precision, recall). 
+Construct a decision tree model and interpret the decision rules for classification.
+
+INPUT:
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.metrics import accuracy_score, precision_score, recall_score, classification_report
+
+# Generate synthetic dataset
+data = {
+    'Feature1': [2, 3, 5, 7, 9, 11, 13, 15, 17, 19],
+    'Feature2': [1, 2, 2, 3, 3, 4, 4, 5, 5, 6],
+    'Label': [0, 0, 0, 1, 1, 1, 1, 1, 1, 1]
+}
+df = pd.DataFrame(data)
+
+# Split data into training and testing sets
+X = df[['Feature1', 'Feature2']]
+y = df['Label']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Logistic Regression Model
+log_reg = LogisticRegression()
+log_reg.fit(X_train, y_train)
+y_pred_log = log_reg.predict(X_test)
+
+# Evaluate Logistic Regression
+print("Logistic Regression Performance:")
+print(f"Accuracy: {accuracy_score(y_test, y_pred_log):.4f}")
+print(f"Precision: {precision_score(y_test, y_pred_log):.4f}")
+print(f"Recall: {recall_score(y_test, y_pred_log):.4f}")
+print(classification_report(y_test, y_pred_log))
+
+# Decision Tree Model
+dec_tree = DecisionTreeClassifier()
+dec_tree.fit(X_train, y_train)
+y_pred_tree = dec_tree.predict(X_test)
+
+# Evaluate Decision Tree
+print("Decision Tree Performance:")
+print(f"Accuracy: {accuracy_score(y_test, y_pred_tree):.4f}")
+print(f"Precision: {precision_score(y_test, y_pred_tree):.4f}")
+print(f"Recall: {recall_score(y_test, y_pred_tree):.4f}")
+print(classification_report(y_test, y_pred_tree))
+
+# Plot Decision Tree
+plt.figure(figsize=(8,6))
+plot_tree(dec_tree, feature_names=['Feature1', 'Feature2'], class_names=['0', '1'], filled=True)
+plt.show()
+
+OUTPUT:
+
+
